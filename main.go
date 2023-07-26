@@ -3,13 +3,14 @@ package main
 import (
 	"fmt"
 
-	"github.com/streadway/amqp"
 	. "gorabbit/checkErr"
+
+	"github.com/streadway/amqp"
 )
 
 func main() {
 	fmt.Println("Hello,Rabbit!")
-	conn, err := amqp.Dial("amqp://guest:guest@localhost:5672/")
+	conn, err := amqp.Dial("amqp://test:123321123@localhost:5672/")
 	CheckErr(err)
 	defer conn.Close()
 
@@ -18,7 +19,7 @@ func main() {
 	CheckErr(err)
 	defer ch.Close()
 	q, err := ch.QueueDeclare(
-		"test_queue",
+		"test_queuee",
 		false,
 		false,
 		false,
@@ -30,7 +31,7 @@ func main() {
 
 	err = ch.Publish(
 		"",
-		"test_queue",
+		"test_queuee",
 		false,
 		false,
 		amqp.Publishing{
